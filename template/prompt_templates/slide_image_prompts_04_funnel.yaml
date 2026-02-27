@@ -1,0 +1,83 @@
+model_preset: nanobanana
+default_aspect_ratio: "16:9"
+default_image_size:
+
+slides:
+  - name: cover_funnel
+    prompt:
+      intent: ファネル分析資料の導入
+      diagram_type: hero_visual
+      message: 各段階の歩留まりを改善する
+      layout:
+        structure: 上から下への流れを示す抽象表現
+      style:
+        tone: data-driven, clean
+      constraints:
+        - 文字なし
+        - 過度な装飾なし
+
+  - name: funnel_overview
+    prompt:
+      intent: 全体ファネルを俯瞰で示す
+      diagram_type: funnel
+      message: どこで大きく離脱しているかを明確化
+      layout:
+        direction: top_to_bottom
+        stages: 5
+      elements:
+        stage_labels:
+          - 認知
+          - 興味
+          - 比較
+          - 申込
+          - 継続
+        dropoff_highlight:
+          stage: 比較
+          emphasis: strong
+      style:
+        illustration: flat funnel infographic
+        palette:
+          primary: indigo
+          accent: red orange
+      constraints:
+        - 段階差を視覚的に分かりやすく
+        - 文字は短いラベルのみ
+
+  - name: stage_actions
+    prompt:
+      intent: 段階別の改善施策を示す
+      diagram_type: stage_action_map
+      message: ボトルネックに対策を紐づける
+      layout:
+        structure: 左にファネル段階、右に施策カード
+      elements:
+        mapping:
+          - stage: 興味
+            action: 訴求改善
+          - stage: 比較
+            action: 事例追加
+          - stage: 申込
+            action: フォーム短縮
+      style:
+        tone: practical consulting slide
+      constraints:
+        - 対応関係を線で明確化
+        - 情報は3-5項目に絞る
+
+  - name: kpi_target
+    prompt:
+      intent: 目標KPIを視覚化する
+      diagram_type: target_progress
+      message: 改善後の到達目標を共有
+      layout:
+        structure: 現状値と目標値の対比
+      elements:
+        metrics:
+          - CVR
+          - 継続率
+          - CAC
+      style:
+        illustration: simple metric infographic
+      constraints:
+        - 誇張しすぎない
+        - 経営層向けに読みやすく

@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Drafts (user working files)
+05_draft/*/
+
+# IDE
+.vscode/
+.idea/
+
+# Images (generated assets)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp

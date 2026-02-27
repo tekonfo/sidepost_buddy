@@ -1,0 +1,79 @@
+model_preset: nanobanana
+default_aspect_ratio: "16:9"
+default_image_size:
+
+prompt_rules:
+  goal:
+    - 図解として意味が通る構図を優先する
+    - 一枚で主張が伝わる視線導線にする
+  nanobanana_prompt_style:
+    - 目的 -> 構図 -> 要素 -> 配色 -> 制約の順に記述する
+    - 要素数を明示し、相対位置を明示する
+    - 文字量は最小限にし、短いラベルのみ許可する
+  visual_constraints:
+    - "no logo, no watermark"
+    - "clean vector-like style"
+    - "high contrast, presentation friendly"
+    - "avoid photoreal clutter"
+
+slides:
+  - name: cover
+    prompt:
+      intent: この資料の価値を冒頭で伝える
+      diagram_type: hero_visual
+      message: 主張を1つに絞る
+      layout:
+        structure: 中央メイン + 周辺サブ要素
+        focus: center
+      elements:
+        main_object: "<主役となるモチーフ>"
+        sub_objects:
+          - "<補助モチーフ1>"
+          - "<補助モチーフ2>"
+      style:
+        tone: "<例: clean, modern, minimal>"
+        palette:
+          primary: "<例: blue>"
+          accent: "<例: orange>"
+      constraints:
+        - 文字なし
+        - 余白多め
+
+  - name: diagram_main
+    prompt:
+      intent: 図解で関係性を理解させる
+      diagram_type: "<flow|comparison|timeline|funnel>"
+      message: "<この図解で伝えたい一文>"
+      layout:
+        direction: "<left_to_right|top_to_bottom|radial>"
+        blocks: "<要素数>"
+        spacing: even
+      elements:
+        node_labels:
+          - "<ラベル1>"
+          - "<ラベル2>"
+          - "<ラベル3>"
+        connectors:
+          style: "<arrow|line|dashed>"
+          emphasis: "<normal|bold>"
+      style:
+        illustration: flat infographic
+        icon_style: outlined simple icons
+      constraints:
+        - 各ラベルは短く
+        - 情報密度を詰めすぎない
+
+  - name: closing
+    prompt:
+      intent: 最後に次アクションを後押しする
+      diagram_type: symbolic
+      message: 前向きな行動喚起
+      layout:
+        structure: 右肩上がりの動線
+      elements:
+        motif: "<例: staircase, arrow, sunrise>"
+      style:
+        tone: confident and optimistic
+      constraints:
+        - 文字なし
+        - シンプル

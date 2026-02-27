@@ -1,0 +1,84 @@
+model_preset: nanobanana
+default_aspect_ratio: "16:9"
+default_image_size:
+
+slides:
+  - name: cover_comparison
+    prompt:
+      intent: 比較資料の導入
+      diagram_type: hero_visual
+      message: 複数案を比較して最適解を選ぶ
+      layout:
+        structure: 左右に対比するシンボル
+      style:
+        tone: modern, neutral, analytical
+      constraints:
+        - 文字なし
+        - ノイズ少なめ
+
+  - name: option_map
+    prompt:
+      intent: 3案の特徴を俯瞰で示す
+      diagram_type: card_comparison
+      message: 各案の違いを短時間で理解する
+      layout:
+        columns: 3
+        rows: 1
+      elements:
+        option_labels:
+          - A案
+          - B案
+          - C案
+        criteria:
+          - コスト
+          - 速度
+          - 拡張性
+      style:
+        illustration: clean cards with icon support
+        palette:
+          primary: navy
+          accent: cyan
+      constraints:
+        - 各カードの情報量を均一に
+        - ラベルは短く
+
+  - name: decision_matrix
+    prompt:
+      intent: 意思決定の根拠を図で示す
+      diagram_type: matrix
+      message: 重要軸で評価するとB案が最適
+      layout:
+        x_axis: 実装スピード
+        y_axis: 期待効果
+        quadrants: true
+      elements:
+        points:
+          - name: A案
+            position: low_speed_mid_impact
+          - name: B案
+            position: high_speed_high_impact
+          - name: C案
+            position: mid_speed_mid_impact
+      style:
+        illustration: clean vector chart style
+      constraints:
+        - 軸ラベル以外の文字を増やしすぎない
+        - B案を視覚的に強調
+
+  - name: recommendation
+    prompt:
+      intent: 推奨案を力強く提示する
+      diagram_type: summary_visual
+      message: B案採用で最短で成果を出す
+      layout:
+        structure: 中央に推奨案、周囲に理由3つ
+      elements:
+        reason_labels:
+          - 速い
+          - 効果大
+          - 運用しやすい
+      style:
+        tone: confident, executive summary
+      constraints:
+        - 視線が中央へ集まる構図
+        - 文字は最小限

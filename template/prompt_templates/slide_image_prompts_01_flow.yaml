@@ -1,0 +1,88 @@
+model_preset: nanobanana
+default_aspect_ratio: "16:9"
+default_image_size:
+
+slides:
+  - name: cover_flow
+    prompt:
+      intent: プロセス図解資料の導入
+      diagram_type: hero_visual
+      message: 業務フローを改善して成果を出す
+      layout:
+        structure: 左から右へ流れる抽象モチーフ
+      style:
+        tone: clean business infographic
+      constraints:
+        - 文字なし
+        - ロゴなし
+
+  - name: asis_flow
+    prompt:
+      intent: 現状フローの複雑さを示す
+      diagram_type: flow
+      message: 現状は手戻りが多く非効率
+      layout:
+        direction: left_to_right
+        lanes: 3
+        nodes: 6
+      elements:
+        node_labels:
+          - 受付
+          - 確認
+          - 手入力
+          - 差戻し
+          - 再確認
+          - 完了
+        connectors:
+          style: arrow
+          include_feedback_loop: true
+      style:
+        palette:
+          primary: slate blue
+          accent: muted red
+      constraints:
+        - 矢印の向きを明確に
+        - 文字は短いラベルのみ
+
+  - name: tobe_flow
+    prompt:
+      intent: 改善後フローのシンプルさを示す
+      diagram_type: flow
+      message: 自動化で工程を短縮
+      layout:
+        direction: left_to_right
+        lanes: 2
+        nodes: 4
+      elements:
+        node_labels:
+          - 受付
+          - 自動判定
+          - 承認
+          - 完了
+        connectors:
+          style: bold_arrow
+      style:
+        palette:
+          primary: blue
+          accent: green
+      constraints:
+        - 余白を十分に取る
+        - 1画面で理解できる単純構造
+
+  - name: impact_flow
+    prompt:
+      intent: 効果を視覚的に強調する
+      diagram_type: before_after
+      message: 工数削減とリードタイム短縮
+      layout:
+        structure: 左Before 右After
+      elements:
+        comparison_items:
+          - 処理時間
+          - エラー率
+          - 担当者負荷
+      style:
+        illustration: minimal infographic
+      constraints:
+        - テキストは項目名のみ
+        - 視認性重視

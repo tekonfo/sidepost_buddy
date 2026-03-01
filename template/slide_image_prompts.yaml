@@ -1,0 +1,57 @@
+model_preset: nanobanana
+default_aspect_ratio: "16:9"
+default_image_size:
+slides:
+  - name: cover
+    prompt:
+      intent: プレゼン全体の導入で期待感を作る
+      subject: 朝の都市を背景にしたビジネスパーソン
+      style: クリーン、モダン、未来感
+      composition:
+        framing: 16:9 の横長、中央に余白を確保
+        depth: 中景中心で奥行きを出す
+      lighting: 朝の柔らかい自然光
+      palette:
+        primary: 青系
+        accent: 白
+      constraints:
+        - 文字なし
+        - ロゴなし
+
+  - name: problem
+    prompt:
+      intent: 課題パートで緊張感を伝える
+      subject: タスクに追われる会社員
+      scene: デスク上にタスクが散乱し、情報過多の状態
+      style: リアル寄り、ややドラマチック
+      palette:
+        primary: 寒色
+        saturation: やや低め
+      constraints:
+        - 文字なし
+        - 過度にホラーにしない
+
+  - name: solution
+    prompt:
+      intent: 解決策パートで前向きさを見せる
+      subject: AIアシスタントと協働するビジネスパーソン
+      scene: 明るいオフィスで業務が整理されている
+      style: フラットデザイン寄り、わかりやすい図解感
+      palette:
+        primary: 明るい青
+        accent: 緑
+      constraints:
+        - 文字なし
+        - ロゴなし
+
+  - name: closing
+    prompt:
+      intent: 行動喚起の締めを印象づける
+      subject: 前進する人物のシルエット
+      style: シンプル、力強い
+      lighting: 希望感のある逆光
+      composition:
+        framing: 16:9 の横長、右下に視線誘導
+      constraints:
+        - 文字なし
+        - 過度な装飾を避ける

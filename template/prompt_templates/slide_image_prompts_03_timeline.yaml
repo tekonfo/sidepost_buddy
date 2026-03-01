@@ -1,0 +1,84 @@
+model_preset: nanobanana
+default_aspect_ratio: "16:9"
+default_image_size:
+
+slides:
+  - name: cover_timeline
+    prompt:
+      intent: ロードマップ資料の導入
+      diagram_type: hero_visual
+      message: 段階的に成果を積み上げる計画
+      layout:
+        structure: 遠近感のある一本道
+      style:
+        tone: strategic, forward-looking
+      constraints:
+        - 文字なし
+        - ロゴなし
+
+  - name: now_to_goal
+    prompt:
+      intent: 現在地と到達点を明確にする
+      diagram_type: timeline
+      message: 現在から目標までの全体像
+      layout:
+        direction: left_to_right
+        milestones: 5
+      elements:
+        milestone_labels:
+          - 現在
+          - 準備
+          - 実装
+          - 展開
+          - 目標達成
+      style:
+        illustration: minimalist timeline infographic
+      constraints:
+        - 各節目を等間隔に配置
+        - ラベルは短く
+
+  - name: quarterly_plan
+    prompt:
+      intent: 四半期計画を可視化する
+      diagram_type: roadmap
+      message: Q1-Q4 の実行テーマを示す
+      layout:
+        structure: horizontal roadmap with 4 segments
+      elements:
+        segment_labels:
+          - Q1 基盤
+          - Q2 実装
+          - Q3 最適化
+          - Q4 拡大
+        highlights:
+          - Q2で主要機能リリース
+          - Q4で収益化強化
+      style:
+        palette:
+          primary: deep blue
+          accent: orange
+      constraints:
+        - セグメント境界を明確に
+        - 視認性重視
+
+  - name: milestone_risk
+    prompt:
+      intent: マイルストーンと主要リスクを同時に示す
+      diagram_type: timeline_with_risk
+      message: 重要局面での対策を先に打つ
+      layout:
+        structure: 上段マイルストーン、下段リスク対策
+      elements:
+        milestones:
+          - PoC完了
+          - 本番導入
+          - KPI達成
+        risks:
+          - 仕様変更
+          - リソース不足
+          - 定着遅延
+      style:
+        tone: practical, management report
+      constraints:
+        - ネガティブ表現は抑制し冷静に
+        - 図全体をシンプルに保つ

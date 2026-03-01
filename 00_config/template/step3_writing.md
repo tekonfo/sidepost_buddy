@@ -4,7 +4,7 @@
 - [ ] step0_memo.md の素材を確認した（本文の根拠はここにある情報のみ）
 - [ ] step1_research.md のリサーチ内容を確認した
 - [ ] step2_design.md の構成を確認した
-- [ ] `02_concept/tone_manner.md` のトンマナを確認した
+- [ ] `00_config/concept/tone_manner.md` のトンマナを確認した
 
 ---
 

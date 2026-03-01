@@ -2,13 +2,13 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
 WORK_DIR="${PROJECT_ROOT}"
-OUTPUT_ROOT="${WORK_DIR}/05_draft"
-TEMPLATE_PATH="${WORK_DIR}/template/slide_image_prompts.yaml"
-PY_SCRIPT="${WORK_DIR}/01_workflow/scripts/generate_images.py"
-REQ_FILE="${WORK_DIR}/01_workflow/scripts/requirements.txt"
+OUTPUT_ROOT="${WORK_DIR}/03_writing/01_draft"
+TEMPLATE_PATH="${WORK_DIR}/00_config/template/slide_image_prompts.yaml"
+PY_SCRIPT="${WORK_DIR}/00_config/workflow/scripts/generate_images.py"
+REQ_FILE="${WORK_DIR}/00_config/workflow/scripts/requirements.txt"
 VENV_DIR="${WORK_DIR}/.venv"
 PYTHON_BIN="${VENV_DIR}/bin/python"
 

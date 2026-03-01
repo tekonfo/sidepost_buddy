@@ -22,8 +22,8 @@
 
 ## 2. 使うスクリプト
 
-- `01_workflow/scripts/highlight_and_redact.py`
-- `01_workflow/scripts/screenshot_privacy_workflow.py`（汎用ランナー）
+- `00_config/workflow/scripts/highlight_and_redact.py`
+- `00_config/workflow/scripts/screenshot_privacy_workflow.py`（汎用ランナー）
 
 このスクリプトで次を一括実行する。
 - 注目範囲外の軽ぼかし
@@ -72,8 +72,8 @@
 
 #### 保存先（規定）
 
-- 文字起こし: `05_draft/<job>/screen_shot/ocr_transcript.md`
-- 機密領域JSON: `05_draft/<job>/screen_shot/sensitive_regions.json`
+- 文字起こし: `03_writing/01_draft/<job>/screen_shot/ocr_transcript.md`
+- 機密領域JSON: `03_writing/01_draft/<job>/screen_shot/sensitive_regions.json`
 
 `ocr_transcript.md` は `transcript_lines` を1行ずつ展開して保存する。
 
@@ -82,12 +82,12 @@
 AIが作った `sensitive_regions.json` を読み込み、機密領域を強ぼかしする。
 
 ```bash
-python3 01_workflow/scripts/highlight_and_redact.py \
-  --input 05_draft/<job>/screen_shot/sample.png \
-  --output 05_draft/<job>/screen_shot/sample_highlight_redacted.png \
+python3 00_config/workflow/scripts/highlight_and_redact.py \
+  --input 03_writing/01_draft/<job>/screen_shot/sample.png \
+  --output 03_writing/01_draft/<job>/screen_shot/sample_highlight_redacted.png \
   --focus 1600,610,2990,1680 \
   --disable-ocr \
-  --manual-redact-file 05_draft/<job>/screen_shot/sensitive_regions.json \
+  --manual-redact-file 03_writing/01_draft/<job>/screen_shot/sensitive_regions.json \
   --normal-blur-radius 2.0 \
   --redact-blur-radius 14.0 \
   --redact-darken 0.35 \
@@ -98,12 +98,12 @@ python3 01_workflow/scripts/highlight_and_redact.py \
 または、汎用ランナーで Step1 + Step2 を一括実行してもよい。
 
 ```bash
-python3 01_workflow/scripts/screenshot_privacy_workflow.py \
-  --ai-response-in 05_draft/<job>/screen_shot/ai_response.md \
-  --normalized-json-out 05_draft/<job>/screen_shot/sensitive_regions.json \
-  --transcript-out 05_draft/<job>/screen_shot/ocr_transcript.md \
-  --input-image 05_draft/<job>/screen_shot/sample.png \
-  --output-image 05_draft/<job>/screen_shot/sample_highlight_redacted.png \
+python3 00_config/workflow/scripts/screenshot_privacy_workflow.py \
+  --ai-response-in 03_writing/01_draft/<job>/screen_shot/ai_response.md \
+  --normalized-json-out 03_writing/01_draft/<job>/screen_shot/sensitive_regions.json \
+  --transcript-out 03_writing/01_draft/<job>/screen_shot/ocr_transcript.md \
+  --input-image 03_writing/01_draft/<job>/screen_shot/sample.png \
+  --output-image 03_writing/01_draft/<job>/screen_shot/sample_highlight_redacted.png \
   --focus 1600,610,2990,1680
 ```
 
@@ -112,12 +112,12 @@ python3 01_workflow/scripts/screenshot_privacy_workflow.py \
 漏れがあれば `--manual-redact` を追加して再実行する。
 
 ```bash
-python3 01_workflow/scripts/highlight_and_redact.py \
-  --input 05_draft/<job>/screen_shot/sample.png \
-  --output 05_draft/<job>/screen_shot/sample_highlight_redacted_v2.png \
+python3 00_config/workflow/scripts/highlight_and_redact.py \
+  --input 03_writing/01_draft/<job>/screen_shot/sample.png \
+  --output 03_writing/01_draft/<job>/screen_shot/sample_highlight_redacted_v2.png \
   --focus 1600,610,2990,1680 \
   --disable-ocr \
-  --manual-redact-file 05_draft/<job>/screen_shot/sensitive_regions.json \
+  --manual-redact-file 03_writing/01_draft/<job>/screen_shot/sensitive_regions.json \
   --manual-redact 2480,1525,2995,1660
 ```
 
@@ -134,13 +134,13 @@ python3 01_workflow/scripts/highlight_and_redact.py \
 AI画像読取が使えない場合だけ、`--disable-ocr` を外してローカルOCRを使う。
 
 ```bash
-python3 01_workflow/scripts/highlight_and_redact.py \
-  --input 05_draft/<job>/screen_shot/sample.png \
-  --output 05_draft/<job>/screen_shot/sample_highlight_redacted_ocr.png \
+python3 00_config/workflow/scripts/highlight_and_redact.py \
+  --input 03_writing/01_draft/<job>/screen_shot/sample.png \
+  --output 03_writing/01_draft/<job>/screen_shot/sample_highlight_redacted_ocr.png \
   --focus 1600,610,2990,1680 \
   --ocr-lang jpn+eng \
-  --ocr-text-out 05_draft/<job>/screen_shot/ocr_transcript.txt \
-  --ocr-tsv-out 05_draft/<job>/screen_shot/ocr_tokens.tsv
+  --ocr-text-out 03_writing/01_draft/<job>/screen_shot/ocr_transcript.txt \
+  --ocr-tsv-out 03_writing/01_draft/<job>/screen_shot/ocr_tokens.tsv
 ```
 
 ## 6. 品質チェック

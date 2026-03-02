@@ -7,8 +7,8 @@
 | タイトル | |
 | 公開日 | YYYY-MM-DD |
 | URL | |
-| 作業フォルダ | `03_writing/01_draft/YYYYMMDD_{テーマ}/` |
-| 企画メモ | `02_ideation/02_evaluation/YYYYMMDD_{テーマ}.md` |
+| 作業フォルダ | `04_writing/01_draft/YYYYMMDD_{テーマ}/` |
+| 企画メモ | `02_planning/02_evaluation/YYYYMMDD_{テーマ}.md` |
 
 ---
 

@@ -18,7 +18,7 @@ argument-hint: "[ジョブフォルダ名]"
 ## 起動時の処理
 
 1. 引数からジョブフォルダ名を取得（例: `20260220_coding_agent`）
-2. 作業フォルダのパスを特定: `03_writing/01_draft/{ジョブ名}/`
+2. 作業フォルダのパスを特定: `04_writing/01_draft/{ジョブ名}/`
 3. **Read** `image_assets/slide_image_prompts.yaml` + 記事本文（`step3_writing.md`）
 
 ---
@@ -77,7 +77,7 @@ argument-hint: "[ジョブフォルダ名]"
 - `.venv` がなければ自動作成（`python3 -m venv`）
 - 依存がなければ自動インストール（`requirements.txt`）
 - API キーが未設定なら Keychain（service: `GEMINI_API_KEY`）から自動読み込み
-- 実行対象: `03_writing/01_draft/{ジョブ名}/image_assets/slide_image_prompts.yaml`
+- 実行対象: `04_writing/01_draft/{ジョブ名}/image_assets/slide_image_prompts.yaml`
 
 ## YAML 最小ルール
 

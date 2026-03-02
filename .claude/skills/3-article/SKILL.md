@@ -50,7 +50,7 @@ flowchart TD
 
 ### 引数が `resume` の場合（途中再開）
 
-1. **Glob** `03_writing/01_draft/*/progress.md` で進行中の作業フォルダを検索
+1. **Glob** `04_writing/01_draft/*/progress.md` で進行中の作業フォルダを検索
 2. 最新のフォルダの **Read** `progress.md` で現在ステップを把握
 3. 未完了のステップから再開
 
@@ -58,7 +58,7 @@ flowchart TD
 
 1. **Bash**: 作業フォルダを作成
    ```bash
-   mkdir -p 03_writing/01_draft/YYYYMMDD_{テーマ短縮}/image_assets
+   mkdir -p 04_writing/01_draft/YYYYMMDD_{テーマ短縮}/image_assets
    ```
 2. 以下を**並列で実行**:
    - **Read** [step0_memo.md](step0_memo.md) → **Write** 作業フォルダに `step0_memo.md` をコピー
@@ -202,7 +202,7 @@ flowchart TD
 ## 作業フォルダ構成
 
 ```
-03_writing/01_draft/YYYYMMDD_{テーマ短縮}/
+04_writing/01_draft/YYYYMMDD_{テーマ短縮}/
 ├── image_assets/
 │   └── slide_image_prompts.yaml
 ├── progress.md

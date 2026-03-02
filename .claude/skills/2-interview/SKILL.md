@@ -132,7 +132,7 @@ AIインタビュー → step0_memo.md → /article（Step 0-5）
 
 | 成果物 | 保存先 |
 |--------|--------|
-| step0出力 | `03_writing/01_draft/YYYYMMDD_{テーマ}/step0_memo.md` |
+| step0出力 | `04_writing/01_draft/YYYYMMDD_{テーマ}/step0_memo.md` |
 
 ---
 

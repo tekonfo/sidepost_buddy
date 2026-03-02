@@ -65,4 +65,4 @@ AI が以下の情報を読み込みます。
 
 ## 次のステップ
 
-計画ができたら [Chapter 5: Ideation フェーズ](./05_ideation.md) で具体的なテーマを選びましょう。
+計画ができたら [Chapter 5: Planning フェーズ](./05_ideation.md) で具体的なテーマを選びましょう。

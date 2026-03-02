@@ -27,8 +27,8 @@ Strategy で定めた方針に基づいてテーマを選定し、Writing（`/ar
 
 | 成果物 | 保存先 | テンプレート |
 |--------|--------|-------------|
-| ネタ帳（テーマ候補リスト） | `02_ideation/01_ideas/` | 自由形式 |
-| 企画メモ（テーマ評価） | `02_ideation/02_evaluation/` | [planning_memo.md](planning_memo.md) |
+| ネタ帳（テーマ候補リスト） | `02_planning/01_ideas/` | 自由形式 |
+| 企画メモ（テーマ評価） | `02_planning/02_evaluation/` | [planning_memo.md](planning_memo.md) |
 
 ---
 
@@ -38,7 +38,7 @@ Strategy で定めた方針に基づいてテーマを選定し、Writing（`/ar
 
 以下を**並列で Read**:
 - `01_strategy/03_target/persona.md`（ペルソナ定義）
-- **Glob** + **Read** `04_analysis/01_data/*.md`（過去の振り返りシート）
+- **Glob** + **Read** `05_management/02_analysis/*.md`（過去の振り返りシート）
 - **Glob** + **Read** `01_strategy/01_calendar/*.md`（コンテンツカレンダー）
 
 テーマ候補を出す方法:
@@ -48,7 +48,7 @@ Strategy で定めた方針に基づいてテーマを選定し、Writing（`/ar
 4. **Strategy のカレンダーから**: カレンダーに沿ったテーマを選定
 5. **過去記事の派生**: 振り返りシートから派生テーマを抽出
 
-テーマ候補を `02_ideation/01_ideas/` に **Write**。
+テーマ候補を `02_planning/01_ideas/` に **Write**。
 
 ### Step 2: テーマ評価
 
@@ -58,7 +58,7 @@ Strategy で定めた方針に基づいてテーマを選定し、Writing（`/ar
    - 自分の独自性（一人称で語れる体験があるか）
    - タイミング（今書くべき理由があるか）
    - 素材の充足度（Step 0 を埋められるだけの素材があるか）
-3. **Write** `02_ideation/02_evaluation/YYYYMMDD_{テーマ短縮}.md`
+3. **Write** `02_planning/02_evaluation/YYYYMMDD_{テーマ短縮}.md`
 
 ### Step 3: テーマ確定
 

@@ -26,7 +26,7 @@ argument-hint: "[記事テーマ or 作業フォルダパス]"
 
 | 成果物 | 保存先 | テンプレート |
 |--------|--------|-------------|
-| 振り返りシート | `04_analysis/01_data/` | [analysis_sheet.md](analysis_sheet.md) |
+| 振り返りシート | `05_management/02_analysis/` | [analysis_sheet.md](analysis_sheet.md) |
 
 ---
 
@@ -35,7 +35,7 @@ argument-hint: "[記事テーマ or 作業フォルダパス]"
 ### Step 1: データ収集
 
 1. **Glob** + **Read**（並列）:
-   - `03_writing/03_published/` or `03_writing/01_draft/*/step5_publish.md` で公開済み記事情報を取得
+   - `04_writing/03_published/` or `04_writing/01_draft/*/step5_publish.md` で公開済み記事情報を取得
    - 引数で指定された作業フォルダの記事情報
 2. ユーザーに note ダッシュボードのデータ入力を依頼:
    - PV数（1週間 / 1ヶ月）
@@ -48,11 +48,11 @@ argument-hint: "[記事テーマ or 作業フォルダパス]"
 
 1. **Read** [analysis_sheet.md](analysis_sheet.md)（テンプレート）
 2. テンプレートに沿って振り返りシートを作成
-3. **Write** `04_analysis/01_data/YYYYMMDD_{記事テーマ短縮}_analysis.md`
+3. **Write** `05_management/02_analysis/YYYYMMDD_{記事テーマ短縮}_analysis.md`
 
 ### Step 3: 改善点の抽出
 
-1. **Glob** + **Read** 過去の振り返りシート（`04_analysis/01_data/*.md`）
+1. **Glob** + **Read** 過去の振り返りシート（`05_management/02_analysis/*.md`）
 2. パターン分析:
    - テーマ選定の傾向
    - 構成・タイトル・導入の効果

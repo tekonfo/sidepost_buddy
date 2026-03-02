@@ -8,7 +8,7 @@ AIと協働して文章記事を作成するためのフレームワーク。
 - **ペルソナレビュー**: 定義したペルソナでsubagentレビューを実施
 - **スライド画像生成**: YAML定義からGemini APIで画像を一括生成
 - **スクリーンショット加工**: プライバシー保護（赤枠ハイライト＋機密ぼかし）
-- **コンテンツ戦略管理**: Strategy → Ideation → Writing → Analysis の4フェーズ
+- **コンテンツ戦略管理**: Strategy → Planning → Prep → Writing → Management の5フェーズ
 
 ## QuickStart
 
@@ -52,17 +52,18 @@ slideimg run  20260301_my_article   # 画像生成
 ## コンテンツライフサイクル
 
 ```
-Strategy → Ideation → Writing → Analysis
-   ↑                                   |
-   └─────── フィードバック ─────────────┘
+Strategy → Planning → Prep → Writing → Management
+   ↑                                              |
+   └─────────────── フィードバック ───────────────┘
 ```
 
 | フェーズ | ディレクトリ | スキル | 役割 |
 |---------|-------------|--------|------|
 | Strategy | `01_strategy/` | `/strategy` | 中期計画・KPI目標 |
-| Ideation | `02_ideation/` | `/ideation` | ネタ出し・テーマ評価 |
-| Writing | `03_writing/` | `/article` | 素材→執筆（Step 0-5） |
-| Analysis | `04_analysis/` | `/analysis` | 振り返り・分析 |
+| Planning | `02_planning/` | `/ideation`, `/interview` | ネタ出し・テーマ評価・企画確定 |
+| Prep | `03_prep/` | `/daily-note-article-items` | 調査・検証メモ・素材蓄積 |
+| Writing | `04_writing/` | `/article` | 素材→執筆（Step 0-5） |
+| Management | `05_management/` | `/analysis` | 進捗管理・振り返り・改善 |
 
 詳細は `/overview` スキルで確認。
 
@@ -115,17 +116,23 @@ Strategy → Ideation → Writing → Analysis
 │   ├── 03_target/                      # ペルソナ定義
 │   └── 04_brand/                       # ブランドスクリプト
 │
-├── 02_ideation/                        # Ideation: 個別企画
+├── 02_planning/                        # Planning: 個別企画
 │   ├── 01_ideas/                       # ネタ帳・テーマ候補
 │   └── 02_evaluation/                  # テーマ評価・企画メモ
 │
-├── 03_writing/                         # Writing: 素材→執筆
+├── 03_prep/                            # Prep: 仕込み（調査・検証）
+│   ├── 01_research/                    # 調査メモ
+│   └── notes/                          # 試行・体験ログ
+│
+├── 04_writing/                         # Writing: 素材→執筆
 │   ├── 01_draft/                       # 作業中の記事
 │   ├── 02_assets/                      # 共有素材・画像
 │   └── 03_published/                   # 公開済み記事
 │
-├── 04_analysis/                        # Analysis: 分析・振り返り
-│   └── 01_data/                        # 振り返りシート・KPIデータ
+├── 05_management/                      # Management: 進捗管理・分析・振り返り
+│   ├── 01_progress/                    # article_progress.csv と運用手順
+│   ├── 02_analysis/                    # 振り返りシート・KPIデータ
+│   └── scripts/                        # 進捗同期スクリプト
 │
 ├── 90_task/                            # 横断: タスク管理
 ├── 99_archive/                         # アーカイブ

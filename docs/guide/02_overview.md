@@ -1,21 +1,22 @@
 # Chapter 2: 全体像を理解する
 
-## 4 フェーズのライフサイクル
+## 5 フェーズのライフサイクル
 
-SidePost Buddy は以下の 4 フェーズで構成されています。
+SidePost Buddy は以下の 5 フェーズで構成されています。
 
 ```
-Strategy → Ideation → Writing → Analysis
-   ↑                                   |
-   └─────── フィードバック ─────────────┘
+Strategy → Planning → Prep → Writing → Management
+   ↑                                              |
+   └─────────────── フィードバック ───────────────┘
 ```
 
 | フェーズ | 役割 | スラッシュコマンド |
 |---------|------|-------------------|
 | **Strategy** | 中期計画・KPI・カレンダーの策定 | `/strategy` |
-| **Ideation** | テーマのネタ出し・評価・確定 | `/ideation`, `/interview` |
+| **Planning** | テーマのネタ出し・評価・確定 | `/ideation`, `/interview` |
+| **Prep** | 調査・試行・素材メモの蓄積 | `/daily-note-article-items` |
 | **Writing** | 記事の作成（Step 0〜5） | `/article`, `/slide`, `/review` |
-| **Analysis** | 公開後の振り返り・改善 | `/analysis` |
+| **Management** | 公開後の振り返り・改善・進捗管理 | `/analysis` |
 
 フェーズ横断で使えるコマンドもあります。
 
@@ -35,24 +36,30 @@ Strategy → Ideation → Writing → Analysis
 │   ├── 02_goals/       　  KPI・戦略計画
 │   ├── 03_target/      　  ペルソナ定義
 │   └── 04_brand/       　  ブランドスクリプト
-├── 02_ideation/        ← Ideation フェーズの成果物
+├── 02_planning/        ← Planning フェーズの成果物
 │   ├── 01_ideas/       　  テーマ候補
 │   └── 02_evaluation/  　  企画メモ（評価結果）
-├── 03_writing/         ← Writing フェーズの作業場所
+├── 03_prep/            ← Prep フェーズの素材蓄積
+│   ├── 01_research/    　  調査メモ
+│   └── notes/          　  試行・体験ログ
+├── 04_writing/         ← Writing フェーズの作業場所
 │   ├── 01_draft/       　  記事作業フォルダ
 │   ├── 02_assets/      　  共有素材
 │   └── 03_published/   　  公開済み記事
-├── 04_analysis/        ← Analysis フェーズの振り返りデータ
+├── 05_management/      ← Management フェーズの管理データ
+│   ├── 01_progress/    　  article_progress.csv / 運用手順
+│   ├── 02_analysis/    　  振り返りシート・KPIデータ
+│   └── scripts/        　  補助スクリプト
 ├── docs/               ← ドキュメント（このガイド）
 └── CLAUDE.md           ← AI への指示ファイル
 ```
 
 ## 記事作業フォルダの構造
 
-`/article` コマンドで記事を作成すると、`03_writing/01_draft/` 配下に専用フォルダが生成されます。
+`/article` コマンドで記事を作成すると、`04_writing/01_draft/` 配下に専用フォルダが生成されます。
 
 ```
-03_writing/01_draft/20260302_副業の始め方/
+04_writing/01_draft/20260302_副業の始め方/
 ├── progress.md                 ← 進捗チェックリスト
 ├── step0_memo.md               ← 素材メモ（ユーザー入力）
 ├── step1_research.md           ← リサーチ結果

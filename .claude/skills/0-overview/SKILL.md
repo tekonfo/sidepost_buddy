@@ -56,7 +56,7 @@ flowchart LR
 
 ## 起動時の自動処理: セッション再開チェック
 
-1. **Glob** `03_writing/01_draft/*/progress.md` で進行中の作業フォルダを検索
+1. **Glob** `04_writing/01_draft/*/progress.md` で進行中の作業フォルダを検索
 2. 見つかった場合:
    - 各 `progress.md` を **Read** して進捗状態を確認
    - 未完了のステップがある記事をユーザーに提示

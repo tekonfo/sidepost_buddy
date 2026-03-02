@@ -1,12 +1,12 @@
 # 進捗CSV運用（ClaudeCode）
 
 このCSVは **進捗管理専用**。  
-KPI（PV・スキ等）は `04_analysis` で管理し、ここには入れない。
+KPI（PV・スキ等）は `05_management/02_analysis` で管理し、ここには入れない。
 
 ## 対象ファイル
 
-- `03_writing/article_progress.csv`
-- `03_writing/scripts/sync_article_progress.py`
+- `05_management/01_progress/article_progress.csv`
+- `05_management/scripts/sync_article_progress.py`
 
 ## 列（最小）
 
@@ -23,14 +23,14 @@ KPI（PV・スキ等）は `04_analysis` で管理し、ここには入れない
 ## 更新フロー（推奨）
 
 1. 機械同期（事実情報）  
-   `python3 03_writing/scripts/sync_article_progress.py`
+   `python3 05_management/scripts/sync_article_progress.py`
 2. ClaudeCode更新（判断情報）  
    `next_action` と `blocker` だけ更新する
 
 ## ClaudeCodeプロンプト例
 
 ```text
-03_writing/article_progress.csv を開いて、
+05_management/01_progress/article_progress.csv を開いて、
 next_action と blocker の2列だけ更新してください。
 
 参照元は各行の draft_dir / progress_file 配下のファイルに限定。

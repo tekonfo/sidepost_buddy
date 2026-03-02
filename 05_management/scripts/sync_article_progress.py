@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sync minimal progress tracker CSV from 03_writing/01_draft."""
+"""Sync minimal progress tracker CSV from 04_writing/01_draft."""
 
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ REQUIRED_ORDER = ["0", "1", "2", "3", "4", "4.5", "5"]
 
 
 def repo_root() -> Path:
-    # /repo/03_writing/scripts/sync_article_progress.py -> /repo
+    # /repo/05_management/scripts/sync_article_progress.py -> /repo
     return Path(__file__).resolve().parents[2]
 
 
@@ -144,7 +144,7 @@ def load_existing_rows(csv_path: Path) -> dict[str, dict[str, str]]:
 
 
 def collect_rows(root: Path, existing: dict[str, dict[str, str]]) -> list[dict[str, str]]:
-    draft_root = root / "03_writing" / "01_draft"
+    draft_root = root / "04_writing" / "01_draft"
     rows: list[dict[str, str]] = []
 
     if not draft_root.exists():
@@ -178,7 +178,7 @@ def collect_rows(root: Path, existing: dict[str, dict[str, str]]) -> list[dict[s
         row["status"] = status
         row["current_step"] = current
         row["updated_date"] = updated_date_from_job(job_dir)
-        row["draft_dir"] = f"03_writing/01_draft/{job_dir.name}"
+        row["draft_dir"] = f"04_writing/01_draft/{job_dir.name}"
         row["progress_file"] = str(progress.relative_to(root)) if progress.exists() else ""
 
         for field in MANUAL_FIELDS:
@@ -200,7 +200,7 @@ def write_rows(csv_path: Path, rows: list[dict[str, str]]) -> None:
 
 def main() -> int:
     root = repo_root()
-    csv_path = root / "03_writing" / "article_progress.csv"
+    csv_path = root / "05_management" / "01_progress" / "article_progress.csv"
     existing = load_existing_rows(csv_path)
     rows = collect_rows(root, existing)
     write_rows(csv_path, rows)

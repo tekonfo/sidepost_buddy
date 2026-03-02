@@ -23,9 +23,9 @@ argument-hint: <daily_note_dir> [days]
 
 ### Phase 2: 出力先を準備
 
-1. 出力ディレクトリを作成する: `03_writing/02_assets/daily_note_extracts/`
+1. 出力ディレクトリを作成する: `04_writing/02_assets/daily_note_extracts/`
 2. ファイル名を作成する: `YYYYMMDD_article_items.md`
-3. 出力パスを組み立てる: `03_writing/02_assets/daily_note_extracts/YYYYMMDD_article_items.md`
+3. 出力パスを組み立てる: `04_writing/02_assets/daily_note_extracts/YYYYMMDD_article_items.md`
 
 ### Phase 3: 抽出スクリプト実行
 
@@ -35,14 +35,14 @@ argument-hint: <daily_note_dir> [days]
 python3 .claude/skills/daily-note-article-items/scripts/extract_article_items.py \
   --daily-dir "<daily_note_dir>" \
   --days "<days>" \
-  --out "03_writing/02_assets/daily_note_extracts/YYYYMMDD_article_items.md"
+  --out "04_writing/02_assets/daily_note_extracts/YYYYMMDD_article_items.md"
 ```
 
 ### Phase 4: 抽出結果を整理
 
 1. 出力ファイルを開き、候補を確認する
 2. 記事化したい項目だけを選ぶ
-3. `03_writing/01_draft/<job>/step0_memo.md` の各セクションへ転記する
+3. `04_writing/01_draft/<job>/step0_memo.md` の各セクションへ転記する
 4. 転記時は意味を変えず、事実を補完・創作しない
 
 ## 出力フォーマット（期待）

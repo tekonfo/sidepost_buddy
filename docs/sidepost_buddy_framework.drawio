@@ -81,10 +81,10 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="i_out1" value="02_ideation/01_ideas/" style="text;html=1;fontSize=9;fontStyle=2;align=left;fontColor=#666666;" vertex="1" parent="1">
+        <mxCell id="i_out1" value="02_planning/01_ideas/" style="text;html=1;fontSize=9;fontStyle=2;align=left;fontColor=#666666;" vertex="1" parent="1">
           <mxGeometry x="80" y="745" width="240" height="18" as="geometry" />
         </mxCell>
-        <mxCell id="i_out2" value="02_ideation/02_evaluation/" style="text;html=1;fontSize=9;fontStyle=2;align=left;fontColor=#666666;" vertex="1" parent="1">
+        <mxCell id="i_out2" value="02_planning/02_evaluation/" style="text;html=1;fontSize=9;fontStyle=2;align=left;fontColor=#666666;" vertex="1" parent="1">
           <mxGeometry x="80" y="763" width="240" height="18" as="geometry" />
         </mxCell>
 
@@ -214,7 +214,7 @@
         </mxCell>
 
         <!-- Writing output -->
-        <mxCell id="w_out" value="03_writing/01_draft/{job}/" style="text;html=1;fontSize=9;fontStyle=2;align=left;fontColor=#666666;" vertex="1" parent="1">
+        <mxCell id="w_out" value="04_writing/01_draft/{job}/" style="text;html=1;fontSize=9;fontStyle=2;align=left;fontColor=#666666;" vertex="1" parent="1">
           <mxGeometry x="620" y="810" width="240" height="18" as="geometry" />
         </mxCell>
 
@@ -242,7 +242,7 @@
           <mxGeometry x="1280" y="335" width="240" height="40" as="geometry" />
         </mxCell>
 
-        <mxCell id="a_out" value="04_analysis/01_data/" style="text;html=1;fontSize=9;fontStyle=2;align=left;fontColor=#666666;" vertex="1" parent="1">
+        <mxCell id="a_out" value="05_management/02_analysis/" style="text;html=1;fontSize=9;fontStyle=2;align=left;fontColor=#666666;" vertex="1" parent="1">
           <mxGeometry x="1280" y="385" width="240" height="18" as="geometry" />
         </mxCell>
 

@@ -36,7 +36,7 @@ argument-hint: "[new|update]"
 ### Step 1: 現状把握
 
 以下を**並列で実行**:
-- **Glob** + **Read**: `04_analysis/01_data/*.md`（過去の振り返りシート）
+- **Glob** + **Read**: `05_management/02_analysis/*.md`（過去の振り返りシート）
 - **Read**: `01_strategy/03_target/persona.md`（ペルソナ定義）
 - **Glob** + **Read**: `01_strategy/02_goals/*.md`（前期の計画）
 - **WebSearch**: コンテンツ領域のトレンド調査（オプション）

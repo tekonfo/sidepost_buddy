@@ -1,4 +1,4 @@
-# Chapter 5: Ideation フェーズ
+# Chapter 5: Planning フェーズ
 
 ## このフェーズの目的
 
@@ -9,6 +9,8 @@
 ```
 /ideation
 ```
+
+※ コマンド名は互換性のため `/ideation` のままです。
 
 ## テーマの発想方法
 
@@ -68,7 +70,7 @@
 ## 企画メモの保存場所
 
 ```
-02_ideation/02_evaluation/YYYYMMDD_テーマ名.md
+02_planning/02_evaluation/YYYYMMDD_テーマ名.md
 ```
 
 ## 初めての場合のコツ

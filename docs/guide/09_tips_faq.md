@@ -41,7 +41,7 @@
 
 ### Q: 複数の記事を同時に進められる？
 
-**A**: はい。`03_writing/01_draft/` 配下に記事ごとのフォルダが作られるため、並行して進められます。ただし、1 セッションでは 1 記事ずつ作業する方がスムーズです。
+**A**: はい。`04_writing/01_draft/` 配下に記事ごとのフォルダが作られるため、並行して進められます。ただし、1 セッションでは 1 記事ずつ作業する方がスムーズです。
 
 ### Q: スライド画像（`/slide`）は必須？
 
@@ -67,14 +67,14 @@
 |---------|---------|------|
 | `/overview` | - | 全体マップ・進行状態の確認 |
 | `/strategy` | Strategy | 中期計画の策定・更新 |
-| `/ideation` | Ideation | テーマの発想・評価 |
-| `/interview` | Ideation | AI インタビューで素材引き出し |
+| `/ideation` | Planning | テーマの発想・評価 |
+| `/interview` | Planning | AI インタビューで素材引き出し |
 | `/article テーマ名` | Writing | 記事の新規作成 |
 | `/article resume` | Writing | 記事の途中再開 |
 | `/slide ジョブ名` | Writing | スライド画像生成 |
 | `/screenshot` | Writing | スクリーンショット加工 |
 | `/review` | Writing | ペルソナレビュー単体実行 |
-| `/analysis` | Analysis | 公開後の振り返り |
+| `/analysis` | Management | 公開後の振り返り |
 | `/persona` | Cross | ペルソナ会話シミュレーション |
 | `/daily-note-article-items` | Cross | デイリーノートから素材抽出 |
 

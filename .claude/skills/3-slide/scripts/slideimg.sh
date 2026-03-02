@@ -6,7 +6,7 @@ PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../../../.." && pwd)"
 SKILL_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 WORK_DIR="${PROJECT_ROOT}"
-OUTPUT_ROOT="${WORK_DIR}/03_writing/01_draft"
+OUTPUT_ROOT="${WORK_DIR}/04_writing/01_draft"
 TEMPLATE_PATH="${SKILL_DIR}/prompt_templates/slide_image_prompts_00_rule_and_blank.yaml"
 PY_SCRIPT="${SCRIPT_DIR}/generate_images.py"
 REQ_FILE="${SCRIPT_DIR}/requirements.txt"

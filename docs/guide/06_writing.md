@@ -189,4 +189,4 @@ AI がペルソナ（想定読者）の視点で記事を評価します。
 
 ## 次のステップ
 
-記事を公開したら [Chapter 7: Analysis フェーズ](./07_analysis.md) で振り返りましょう。
+記事を公開したら [Chapter 7: Management フェーズ](./07_analysis.md) で振り返りましょう。

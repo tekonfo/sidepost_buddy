@@ -25,3 +25,5 @@ Thumbs.db
 *.jpeg
 *.gif
 *.webp
+
+ignore_/

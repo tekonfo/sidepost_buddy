@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SidePost Buddy Framework | AI協働 執筆完全ガイド</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@500;700;800;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap");
+
+      :root {
+        --bg: #f8fafc;
+        --ink: #0f172a;
+        --muted: #64748b;
+        --line: #e2e8f0;
+        --accent: #10b981;
+        --p1: #3b82f6; --p1-light: #eff6ff;
+        --p2: #f59e0b; --p2-light: #fffbeb;
+        --p3: #10b981; --p3-light: #ecfdf5;
+        --p4: #6366f1; --p4-light: #eef2ff;
+        --pain-bg: #1e293b;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; font-family: "Zen Kaku Gothic New", sans-serif; color: var(--ink); background-color: var(--bg);
+        line-height: 1.6; overflow-x: hidden;
+      }
+      .container { width: min(1200px, 94%); margin: 0 auto; padding: 40px 0 100px; }
+
+      /* Hero */
+      .hero { text-align: center; margin-bottom: 60px; position: relative; }
+      .hero h1 { font-family: "M PLUS 1p", sans-serif; font-weight: 900; font-size: clamp(2.2rem, 6vw, 4rem); margin: 0; letter-spacing: -0.02em; line-height: 1.2; }
+      .hero p { font-size: 1.25rem; color: var(--muted); margin-top: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+      /* --- HERO VISUAL (CSS UI Mockup) --- */
+      .hero-visual-wrapper {
+        perspective: 1200px;
+        margin: 60px auto 40px;
+        width: min(900px, 95%);
+      }
+      .hero-visual {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 24px;
+        box-shadow: 0 50px 100px -20px rgba(0,0,0,0.15), 0 30px 60px -30px rgba(0,0,0,0.2);
+        display: grid;
+        grid-template-columns: 200px 1fr 240px;
+        height: 500px;
+        overflow: hidden;
+        transform: rotateX(10deg) rotateY(-5deg) rotateZ(1deg);
+        transition: transform 0.5s ease;
+      }
+      .hero-visual:hover { transform: rotateX(5deg) rotateY(-2deg) rotateZ(0deg); }
+      @media (max-width: 850px) {
+        .hero-visual { grid-template-columns: 1fr; height: auto; transform: none; }
+        .vis-sidebar, .vis-buddy { display: none; }
+      }
+
+      .vis-sidebar { background: rgba(0,0,0,0.03); border-right: 1px solid var(--line); padding: 20px; }
+      .vis-editor { padding: 40px; text-align: left; background: white; }
+      .vis-buddy { background: #f1f5f9; border-left: 1px solid var(--line); padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+
+      .vis-step { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.75rem; font-weight: 700; color: #94a3b8; }
+      .vis-step.active { color: var(--p3); }
+      .vis-dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; }
+      .vis-step.active .vis-dot { background: var(--p3); box-shadow: 0 0 8px var(--p3); }
+
+      .vis-title-bar { height: 12px; width: 60%; background: #e2e8f0; border-radius: 6px; margin-bottom: 20px; }
+      .vis-line { height: 8px; width: 100%; background: #f1f5f9; border-radius: 4px; margin-bottom: 10px; }
+      .vis-line.short { width: 40%; }
+      .vis-accent-line { height: 40px; width: 100%; background: var(--p3-light); border-left: 4px solid var(--p3); margin: 20px 0; border-radius: 4px; }
+
+      .vis-chat { background: white; padding: 12px; border-radius: 12px; font-size: 0.7rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+      .vis-chat.ai { border-left: 3px solid var(--accent); }
+
+      .floating-stats {
+        position: absolute;
+        top: 20%;
+        right: -40px;
+        background: white;
+        padding: 15px 25px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        z-index: 10;
+        animation: float 4s ease-in-out infinite;
+      }
+      .floating-stats strong { color: var(--accent); font-size: 1.4rem; display: block; }
+      .floating-stats span { font-size: 0.75rem; color: var(--muted); }
+
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+      /* Pain Points Section */
+      .pain-section { background: var(--pain-bg); color: white; padding: 80px 0; margin: 40px 0 60px; border-radius: 40px; text-align: center; }
+      .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; width: min(1100px, 92%); margin: 40px auto 0; }
+      .pain-card { background: rgba(255, 255, 255, 0.05); padding: 36px; border-radius: 28px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: left; display: flex; flex-direction: column; gap: 20px; }
+      .pain-card h4 { margin: 0; font-family: "M PLUS 1p", sans-serif; color: var(--accent); font-size: 0.85rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+      .pain-card h3 { margin: 0; font-size: 1.4rem; font-weight: 800; line-height: 1.3; color: #f8fafc; }
+      .pain-list { margin: 0; padding: 0; list-style: none; }
+      .pain-list li { margin-bottom: 12px; font-size: 0.95rem; color: #94a3b8; padding-left: 24px; position: relative; line-height: 1.5; }
+      .pain-list li::before { content: "×"; position: absolute; left: 0; color: #f43f5e; font-weight: bold; font-size: 1.2rem; }
+      .pain-footer { margin-top: 50px; font-size: 1.15rem; color: #cbd5e1; max-width: 800px; margin-left: auto; margin-right: auto; }
+      .pain-footer strong { color: var(--accent); font-size: 1.4rem; display: block; margin-top: 10px; }
+
+      /* Lifecycle Overview */
+      .lifecycle-section { margin-bottom: 100px; text-align: center; }
+      .lifecycle-flow { display: flex; justify-content: space-between; align-items: center; margin: 50px 0; position: relative; flex-wrap: wrap; gap: 20px; }
+      @media (max-width: 800px) { .lifecycle-flow { flex-direction: column; } }
+      .flow-item { flex: 1; padding: 24px; border-radius: 24px; background: white; border: 2px solid var(--line); position: relative; min-width: 200px; }
+      .flow-item h3 { margin: 0 0 8px; font-family: "M PLUS 1p", sans-serif; font-size: 1.1rem; }
+      .flow-item p { margin: 0; font-size: 0.85rem; color: var(--muted); }
+      .flow-arrow { font-size: 1.5rem; color: var(--line); font-weight: 900; }
+      @media (max-width: 800px) { .flow-arrow { transform: rotate(90deg); } }
+      .flow-item.p1-item { border-color: var(--p1); } .flow-item.p2-item { border-color: var(--p2); } .flow-item.p3-item { border-color: var(--p3); } .flow-item.p4-item { border-color: var(--p4); }
+      .feedback-loop { margin-top: 20px; font-size: 0.9rem; color: var(--p4); font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+      /* Phase Container (Vertical) */
+      .phase-section { margin-bottom: 100px; }
+      .phase-header { display: flex; align-items: baseline; gap: 15px; margin-bottom: 30px; border-bottom: 2px solid var(--line); padding-bottom: 10px; }
+      .phase-no { font-family: "M PLUS 1p", sans-serif; font-weight: 900; font-size: 1.5rem; opacity: 0.3; }
+      .phase-title { font-family: "M PLUS 1p", sans-serif; font-weight: 800; font-size: 2.2rem; margin: 0; }
+      .phase-summary { font-size: 1.1rem; color: var(--muted); margin-top: 10px; }
+
+      /* Artifact Carousel */
+      .artifact-carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 24px; padding: 20px 0 40px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+      .artifact-carousel::-webkit-scrollbar { height: 6px; }
+      .artifact-carousel::-webkit-scrollbar-thumb { background: var(--line); border-radius: 10px; }
+
+      .artifact-card { min-width: 450px; scroll-snap-align: start; background: white; border-radius: 24px; border: 1px solid var(--line); padding: 32px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 20px; transition: transform 0.3s; }
+      .artifact-card:hover { transform: translateY(-5px); }
+      @media (max-width: 600px) { .artifact-card { min-width: 85vw; padding: 20px; } }
+
+      .art-head { display: flex; justify-content: space-between; align-items: center; }
+      .art-label { font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+      .art-name { font-family: "M PLUS 1p", sans-serif; font-weight: 800; font-size: 1.4rem; margin: 5px 0 0; }
+      .art-body p { font-size: 0.95rem; color: var(--muted); margin: 0 0 15px; }
+      .art-details { background: #f8fafc; border-radius: 16px; padding: 20px; border: 1px solid #f1f5f9; }
+      .art-details h5 { margin: 0 0 10px; font-size: 0.85rem; color: var(--ink); }
+      .art-list { margin: 0; padding: 0; list-style: none; font-size: 0.85rem; color: var(--muted); }
+      .art-list li { margin-bottom: 8px; padding-left: 18px; position: relative; }
+      .art-list li::before { content: "•"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+
+      .viz-box { margin-top: 15px; height: 100px; background: white; border-radius: 12px; border: 1px solid #edf2f7; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+
+      .p1-section .phase-title { color: var(--p1); } .p1-section .art-name { color: var(--p1); }
+      .p2-section .phase-title { color: var(--p2); } .p2-section .art-name { color: var(--p2); }
+      .p3-section .phase-title { color: var(--p3); } .p3-section .art-name { color: var(--p3); }
+      .p4-section .phase-title { color: var(--p4); } .p4-section .art-name { color: var(--p4); }
+
+      .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 50px; }
+      .guide-card { padding: 20px; background: white; border: 1px solid var(--line); border-radius: 16px; text-decoration: none; color: inherit; }
+      .guide-card span { font-size: 0.7rem; color: var(--accent); font-weight: 800; display: block; margin-bottom: 5px; }
+      footer { text-align: center; padding: 60px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      
+      <section class="hero">
+        <h1>SidePost Buddy Framework</h1>
+        <p>あなたの体験を「資産」に変え、読者に届けるための共創システム</p>
+
+        <!-- HERO VISUAL -->
+        <div class="hero-visual-wrapper">
+          <div class="hero-visual">
+            <div class="vis-sidebar">
+              <div class="vis-step"><div class="vis-dot"></div> 企画・設計</div>
+              <div class="vis-step"><div class="vis-dot"></div> 情報収集</div>
+              <div class="vis-step active"><div class="vis-dot"></div> 執筆実行</div>
+              <div style="margin-top: 40px;">
+                <div class="vis-step">ステップ 0: メモ</div>
+                <div class="vis-step">ステップ 1: 調査</div>
+                <div class="vis-step active">ステップ 2: 構成</div>
+                <div class="vis-step">ステップ 3: 本文</div>
+              </div>
+            </div>
+            <div class="vis-editor">
+              <div class="vis-title-bar"></div>
+              <div class="vis-line"></div>
+              <div class="vis-line"></div>
+              <div class="vis-line short"></div>
+              <div class="vis-accent-line"></div>
+              <div class="vis-line"></div>
+              <div class="vis-line"></div>
+            </div>
+            <div class="vis-buddy">
+              <div style="font-size: 0.65rem; font-weight: 800; color: var(--muted);">AIバディのフィードバック</div>
+              <div class="vis-chat ai">体験の「痛み」を具体化しましょう。読者の共感が高まります。</div>
+              <div class="vis-chat">了解です。実行フェーズの知見を追記します。</div>
+              <div class="vis-chat ai">ボトムアップ構成案を生成しました。</div>
+            </div>
+          </div>
+          <div class="floating-stats">
+            <strong>完了率 +40%</strong>
+            <span>執筆の棚卸し</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAIN POINTS -->
+      <section class="pain-section">
+        <h2 style="font-family: 'M PLUS 1p'; font-size: 2.2rem; margin: 0;">こんな悩み、ありませんか？</h2>
+        <div class="pain-grid">
+          <article class="pain-card">
+            <h4>Case 01: 手が止まる</h4>
+            <h3>「書くこと」がない<br>情報の解像度不足</h3>
+            <ul class="pain-list">
+              <li>いざ書こうとしても、中身が薄くて筆が進まない</li>
+              <li>「何を伝えるべきか」の軸がブレてしまう</li>
+              <li>下書きが10個以上溜まったまま、中途半端に放置される</li>
+            </ul>
+          </article>
+          <article class="pain-card">
+            <h4>Case 02: 準備不足</h4>
+            <h3>いきなり「執筆」に<br>取り掛かってしまう</h3>
+            <ul class="pain-list">
+              <li>料理と同じ。下準備なしで名作は生まれない</li>
+              <li>自分のリアルな体験や調査データが不足している</li>
+              <li>AIに丸投げして、内容のない「AI感」満載の文になる</li>
+            </ul>
+          </article>
+          <article class="pain-card">
+            <h4>Case 03: 管理の欠如</h4>
+            <h3>「書きっぱなし」で<br>資産にならない</h3>
+            <ul class="pain-list">
+              <li>過去の記事がどう貢献しているか分からない</li>
+              <li>伝えたいコンセプトが全体で一貫していない</li>
+              <li>執筆ステータスが管理できず、重要なネタを忘れる</li>
+            </ul>
+          </article>
+        </div>
+        <div class="pain-footer">
+          これらの悩みは、あなたの才能の問題ではありません。
+          <strong>「企画・実行・執筆」の分離と、それを支える「管理」の仕組みが必要です。</strong>
+        </div>
+      </section>
+
+      <!-- LIFECYCLE OVERVIEW -->
+      <section class="lifecycle-section">
+        <h2 style="font-family: 'M PLUS 1p'; font-size: 2rem;">フレームワークの構造</h2>
+        <p style="color: var(--muted);">管理された実行サイクルの深層に、不変の「戦略」が土台として存在します。</p>
+        
+        <!-- Management & Steps Loop -->
+        <div style="position: relative; padding: 40px; background: #fff; border: 2px solid var(--p4); border-radius: 40px; margin-bottom: 30px;">
+          <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--p4); color: white; padding: 5px 20px; border-radius: 20px; font-size: 0.8rem; font-weight: 800;">
+            MANAGEMENT (実行サイクルの管理)
+          </div>
+          
+          <div class="lifecycle-flow" style="margin: 20px 0;">
+            <div class="flow-item p2-item">
+              <span style="font-size: 0.7rem; color: var(--p2); font-weight: 800;">STEP 01</span>
+              <h3>企画する</h3>
+              <p>テーマ選定・切り口の考案</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-item p2-item" style="border-color: #f97316;">
+              <span style="font-size: 0.7rem; color: #f97316; font-weight: 800;">STEP 02</span>
+              <h3>仕込む</h3>
+              <p>情報収集・下準備</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-item p3-item">
+              <span style="font-size: 0.7rem; color: var(--p3); font-weight: 800;">STEP 03</span>
+              <h3>執筆する</h3>
+              <p>構成・記事作成</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Foundation at the bottom -->
+        <div style="background: var(--p1-light); padding: 30px; border-radius: 30px; border: 2px dashed var(--p1);">
+          <span style="font-size: 0.7rem; color: var(--p1); font-weight: 800;">FOUNDATION</span>
+          <h3 style="margin: 10px 0;">戦略策定 (Strategy)</h3>
+          <p style="font-size: 0.9rem; margin: 0;">ターゲット・コンセプト・独自価値の定義（発信の軸）</p>
+        </div>
+      </section>
+
+      <!-- PHASE 1: STRATEGY (FOUNDATION) -->
+      <section id="strategy" class="phase-section p1-section">
+        <header class="phase-header">
+          <span class="phase-no">PHASE 01</span>
+          <h2 class="phase-title">戦略策定 (Strategy)</h2>
+        </header>
+        <p class="phase-summary">発信の「OS」を構築し、AIバディにあなたの価値観をインストールする最重要フェーズです。</p>
+
+        <div class="artifact-carousel">
+          <!-- Artifact 1: Persona -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">成果物: persona.md</span><h3 class="art-name">ペルソナ定義</h3></div>
+              <div style="font-size: 1.5rem;">👤</div>
+            </div>
+            <div class="art-body">
+              <p>単なる属性情報ではなく、読者が夜も眠れないほど悩んでいる「痛み」と、記事を読んだ後の「理想の状態」を定義します。</p>
+              <div class="art-details">
+                <h5>活用シーン:</h5>
+                <ul class="art-list">
+                  <li>AIによるターゲット視点の記事レビュー</li>
+                  <li>読者の悩みに突き刺さる「切り口」の生成基準</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artifact 2: Brand Script -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">成果物: brand_script.md</span><h3 class="art-name">ブランド・スクリプト</h3></div>
+              <div style="font-size: 1.5rem;">🎯</div>
+            </div>
+            <div class="art-body">
+              <p>読者を「主人公」とし、あなたを「導き手」とする物語を設計。発信の一貫性と独自価値を言語化します。</p>
+              <div class="art-details">
+                <h5>設定内容:</h5>
+                <ul class="art-list">
+                  <li><strong>独自価値:</strong> あなたにしか語れない解決策</li>
+                  <li><strong>成功の定義:</strong> 読者が得られる究極のベネフィット</li>
+                  <li><strong>トンマナ:</strong> 信頼と共感を生む言葉選びの指針</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PHASE 2: MANAGEMENT -->
+      <section id="management" class="phase-section p4-section">
+        <header class="phase-header">
+          <span class="phase-no">PHASE 02</span>
+          <h2 class="phase-title">管理する (Management)</h2>
+        </header>
+        <p class="phase-summary">企画・実行・執筆のサイクルを最適化し、発信を停滞させないための管制塔です。</p>
+
+        <div class="artifact-carousel">
+          <!-- Artifact 1: Status Inventory -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">成果物: article_progress.csv</span><h3 class="art-name">進捗の棚卸し</h3></div>
+              <div style="font-size: 1.5rem;">📋</div>
+            </div>
+            <div class="art-body">
+              <p>「書きたい」と思ったネタがどこで止まっているかを可視化。中途半端な下書きを救出し、完了へと導きます。</p>
+              <div class="art-details">
+                <h5>管理項目:</h5>
+                <ul class="art-list">
+                  <li>企画・実行・執筆の各ステータス管理</li>
+                  <li>公開済み記事の資産化と再利用の検討</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artifact 2: Loop Optimization -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">分析・改善</span><h3 class="art-name">反応の分析と還元</h3></div>
+              <div style="font-size: 1.5rem;">📈</div>
+            </div>
+            <div class="art-body">
+              <p>公開後の反応（PV/スキ数）を分析し、戦略や次の企画へ還元。読者の真のニーズに合わせて発信の精度を高めます。</p>
+              <div class="art-details">
+                <h5>フィードバック内容:</h5>
+                <ul class="art-list">
+                  <li>ターゲットの悩みに適合していたかの検証</li>
+                  <li>次に優先して執筆すべきテーマの特定</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artifact 3: Retrospective -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">プロセス改善</span><h3 class="art-name">振り返りと最適化</h3></div>
+              <div style="font-size: 1.5rem;">🔄</div>
+            </div>
+            <div class="art-body">
+              <p>「記事を何本出したか」という定量的な実績に加え、「なぜ筆が止まったのか」という定性的なボトルネックを徹底的に分析します。</p>
+              <div class="art-details">
+                <h5>振り返りの視点:</h5>
+                <ul class="art-list">
+                  <li><strong>実績管理:</strong> 期間内の公開本数と目標達成度の確認</li>
+                  <li><strong>詰まりの解消:</strong> 「調査が重すぎた」「企画が曖昧だった」等の停滞原因の特定</li>
+                  <li><strong>仕組みの更新:</strong> 振り返りを元に、プロンプトやワークフローを改善</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PHASE 3: PLANNING -->
+      <section id="planning" class="phase-section p2-section">
+        <header class="phase-header">
+          <span class="phase-no">STEP 01</span>
+          <h2 class="phase-title">企画する (Planning)</h2>
+        </header>
+        <p class="phase-summary">日々の「種」を拾い上げ、戦略に沿った価値ある企画へ昇華させるプロセスです。</p>
+
+        <div class="artifact-carousel">
+          <!-- Artifact 1: Idea Scraping -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">プロセス: 01</span><h3 class="art-name">ネタの自動抽出</h3></div>
+              <div style="font-size: 1.5rem;">🌱</div>
+            </div>
+            <div class="art-body">
+              <p>日々のデイリーノートから、記事になりそうな「思考の断片」をAIが自動でスクレイピングします。</p>
+              <div class="art-details">
+                <h5>仕組み:</h5>
+                <ul class="art-list">
+                  <li>ノート内の特定のタグや記述から独自の気づきを特定</li>
+                  <li>未整理のメモを「企画の種」としてプール</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artifact 2: Evaluation Matrix -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">プロセス: 02</span><h3 class="art-name">評価マトリックス</h3></div>
+              <div style="font-size: 1.5rem;">📊</div>
+            </div>
+            <div class="art-body">
+              <p>抽出したネタを客観的な指標でスコアリング。本当に書く価値のあるものだけを厳選します。</p>
+              <div class="art-details">
+                <h5>評価項目:</h5>
+                <ul class="art-list">
+                  <li><strong>需要:</strong> 読者の痛みを解決できるか？</li>
+                  <li><strong>独自性:</strong> あなたならではの体験が含まれるか？</li>
+                  <li><strong>納得感:</strong> 読者が納得できる解決策を提示できるか？</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artifact 3: AI Interview -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">プロセス: 03</span><h3 class="art-name">AIインタビュー</h3></div>
+              <div style="font-size: 1.5rem;">🎤</div>
+            </div>
+            <div class="art-body">
+              <p>企画が決まったら、AIが深掘り質問を実施。あなたの頭の中にある「暗黙知」を引き出し、構成の核を作ります。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PHASE 4: ACTION -->
+      <section id="action" class="phase-section p2-section">
+        <header class="phase-header">
+          <span class="phase-no">STEP 02</span>
+          <h2 class="phase-title">仕込む (Prep)</h2>
+        </header>
+        <p class="phase-summary">「下調べ」と「試行」のフェーズ。執筆を加速させるための最高品質の素材を揃えます。</p>
+
+        <div class="artifact-carousel">
+          <!-- Artifact 1: Info Gathering -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">プロセス: 01</span><h3 class="art-name">情報収集・調査</h3></div>
+              <div style="font-size: 1.5rem;">🔍</div>
+            </div>
+            <div class="art-body">
+              <p>企画テーマに関連する市場の反応や競合記事を調査。何が語られ、何が語られていないかを特定します。</p>
+              <div class="art-details">
+                <h5>実施内容:</h5>
+                <ul class="art-list">
+                  <li>事実情報の裏付け、エビデンスの収集</li>
+                  <li>読者のナマの声、SNS等の反応調査</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artifact 2: Experience Logging -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">プロセス: 02</span><h3 class="art-name">体験と試行の記録</h3></div>
+              <div style="font-size: 1.5rem;">🛠️</div>
+            </div>
+            <div class="art-body">
+              <p>実際に手を動かし、試行錯誤の過程を `notes` フォルダに記録。成功だけでなく「失敗のプロセス」こそが独自価値になります。</p>
+              <div class="art-details">
+                <h5>蓄積される素材:</h5>
+                <ul class="art-list">
+                  <li>スクリーンショット、検証データ、その時の生々しい感情</li>
+                  <li>独自の工夫点、意外な発見のメモ</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PHASE 5: WRITING -->
+      <section id="writing" class="phase-section p3-section">
+        <header class="phase-header">
+          <span class="phase-no">STEP 03</span>
+          <h2 class="phase-title">執筆する (Writing)</h2>
+        </header>
+        <p class="phase-summary">揃った素材を、AIとの共創によって一気に記事へと昇華させるフィニッシュフェーズです。</p>
+
+        <div class="artifact-carousel">
+          <!-- Artifact 1: 6-Step Workflow -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">ワークフロー</span><h3 class="art-name">6ステップ・パイプライン</h3></div>
+              <div style="font-size: 1.5rem;">🚀</div>
+            </div>
+            <div class="art-body">
+              <p>`/article` コマンドを起点とする標準化されたプロセス。迷いを排除し、執筆の摩擦をゼロにします。</p>
+              <div class="art-details">
+                <h5>ステップ詳細:</h5>
+                <ul class="art-list">
+                  <li><strong>0.メモ:</strong> 企画・実行の情報を集約</li>
+                  <li><strong>1.調査 / 2.設計:</strong> 構成案の確定</li>
+                  <li><strong>3.執筆 / 4.推敲 / 5.公開:</strong> 記事の完成</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artifact 2: Dual Pattern -->
+          <article class="artifact-card">
+            <div class="art-head">
+              <div><span class="art-label">手法</span><h3 class="art-name">執筆パターンの使い分け</h3></div>
+              <div style="font-size: 1.5rem;">📝</div>
+            </div>
+            <div class="art-body">
+              <p>内容の性質に応じて、AIとの共創パターンを切り替えます。</p>
+              <div class="art-details">
+                <h5>パターン:</h5>
+                <ul class="art-list">
+                  <li><strong>ボトムアップ:</strong> 散らばったメモから共通項を見出し、記事化</li>
+                  <li><strong>トップダウン:</strong> 構成案を固め、各所に素材を埋め込み</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- GUIDES -->
+      <nav style="margin-top: 80px;">
+        <h2 style="text-align: center; font-family: 'M PLUS 1p';">ドキュメント・ガイド</h2>
+        <div class="guide-grid">
+          <a href="./guide/01_introduction.md" class="guide-card"><span>01</span>はじめに</a>
+          <a href="./guide/02_overview.md" class="guide-card"><span>02</span>全体像の理解</a>
+          <a href="./guide/03_setup.md" class="guide-card"><span>03</span>セットアップ</a>
+          <a href="./guide/04_strategy.md" class="guide-card"><span>04</span>戦略の策定</a>
+          <a href="./guide/05_ideation.md" class="guide-card"><span>05</span>テーマの企画</a>
+          <a href="./guide/06_writing.md" class="guide-card"><span>06</span>執筆フロー</a>
+          <a href="./guide/07_analysis.md" class="guide-card"><span>07</span>分析と改善</a>
+          <a href="./guide/08_utilities.md" class="guide-card"><span>08</span>便利機能</a>
+        </div>
+      </nav>
+
+      <footer>
+        &copy; 2026 SidePost Buddy Framework | Built with AI Co-creation
+      </footer>
+    </main>
+  </body>
+</html>

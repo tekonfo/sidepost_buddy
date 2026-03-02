@@ -17,7 +17,7 @@
 
 
 ### ターゲット読者の優先順位
-<!-- 00_config/concept/persona.md のペルソナを優先順に並べる -->
+<!-- 01_strategy/03_target/persona.md のペルソナを優先順に並べる -->
 1.
 2.
 

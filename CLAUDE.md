@@ -19,46 +19,39 @@ Strategy → Ideation → Writing → Analysis
 |---------|-------------|------|
 | Strategy | `01_strategy/` | 中期計画・コンテンツカレンダー・KPI目標 |
 | Ideation | `02_ideation/` | 個別記事のネタ出し・テーマ評価・確定 |
-| Writing | `03_writing/` | 素材収集 → 執筆（既存Step 0-5） |
+| Writing | `03_writing/` | 素材収集 → 執筆（Step 0-5） |
 | Analysis | `04_analysis/` | 公開後の振り返り・パフォーマンス分析 |
 
-ライフサイクル全体は `00_config/workflow/00_overview.md` を参照。
+ライフサイクル全体は `/overview` スキルで確認。
 
-## ワークフロー起点
+## スキル（スラッシュコマンド）
 
-作業を開始する場合は、まず以下のワークフローを参照する:
+作業を開始する場合は、対応するスキルを実行する:
 
-| ワークフロー | ファイル | 用途 |
-|-------------|---------|------|
-| ライフサイクル全体 | `00_config/workflow/00_overview.md` | フェーズ全体マップ |
-| 記事作成 | `00_config/workflow/01_article_creation.md` | Writing メインワークフロー（Step 0-5） |
-| AIインタビュー | `00_config/workflow/02_ai_interview.md` | テーマが漠然としている場合の前段プロセス |
-| スクリーンショット加工 | `00_config/workflow/03_screenshot_privacy.md` | 画像のプライバシー保護 |
-| スライド画像作成 | `00_config/workflow/04_slide_generation.md` | 記事用スライド画像の生成 |
-| ペルソナ会話 | `00_config/workflow/05_persona_roleplay.md` | ペルソナロールプレイでコンテンツ検証 |
-| 戦略会議 | `00_config/workflow/06_strategy_council.md` | マルチAI戦略会議（準備中） |
-| 個別企画 | `00_config/workflow/07_planning.md` | Ideation テーマ評価ワークフロー |
-| 公開後分析 | `00_config/workflow/08_post_analysis.md` | Analysis 振り返りワークフロー |
-| 中期計画 | `00_config/workflow/09_strategy.md` | Strategy 計画策定ワークフロー |
+| コマンド | フェーズ | 用途 |
+|---------|---------|------|
+| `/overview` | - | ライフサイクル全体マップ・セッション再開 |
+| `/strategy` | Strategy | 中期計画策定 |
+| `/ideation` | Ideation | テーマ企画・評価 |
+| `/interview` | Ideation | AIインタビューで素材引き出し |
+| `/article` | Writing | 記事作成（Step 0-5） |
+| `/slide` | Writing | スライド画像生成 |
+| `/screenshot` | Writing | スクリーンショット加工 |
+| `/review` | Writing | ペルソナレビュー単体実行 |
+| `/analysis` | Analysis | 公開後振り返り |
+| `/persona` | Cross | ペルソナ会話シミュレーション |
+| `/daily-note-article-items` | Cross | デイリーノートから記事素材抽出 |
 
-## テンプレート
-
-テンプレートは `00_config/template/` 配下に格納:
-
-- `00_config/template/step0_memo.md` 〜 `00_config/template/step5_publish.md` — Writing 各ステップ
-- `00_config/template/planning_memo.md` — Ideation 企画メモ
-- `00_config/template/analysis_sheet.md` — Analysis 振り返りシート
-- `00_config/template/strategy_sheet.md` — Strategy 中期計画シート
-- `00_config/template/prompt_templates/` — スライド画像生成用YAMLテンプレート
-- `00_config/template/brand/` — ブランドスクリプトテンプレート
+各スキルの詳細は `.claude/skills/` 配下の SKILL.md を参照。
 
 ## ブランド設定
 
-ユーザー固有のブランド設定は `00_config/concept/` に記入する:
-
-- `00_config/concept/persona.md` — ターゲットペルソナ定義
-- `00_config/concept/brand_script.md` — StoryBrand SB7ブランドスクリプト
-- `00_config/concept/tone_manner.md` — トーン＆マナー定義
+| ファイル | パス | 用途 |
+|---------|------|------|
+| ペルソナ定義 | `01_strategy/03_target/persona.md` | ターゲット読者の定義 |
+| ブランドスクリプト | `01_strategy/04_brand/brand_script.md` | StoryBrand SB7 |
+| トーン＆マナー | `00_config/concept/tone_manner.md` | 文体・表現ルール |
+| ブランドスクリプトテンプレート | `00_config/template/brand/brand_script_template.md` | ブランドスクリプトの型 |
 
 ## AI制約（重要）
 
@@ -79,3 +72,25 @@ Strategy → Ideation → Writing → Analysis
 └── image_assets/
     └── slide_image_prompts.yaml
 ```
+
+## Claude Code ツール利用ガイドライン
+
+### ファイル操作パターン
+- テンプレートは各スキルディレクトリ内の `.md` ファイルを **Read** → 作業フォルダに **Write** でコピー
+- 独立したファイルの読み込みは**並列 Read** で効率化
+- 記事の修正は **Edit** tool で差分のみ更新
+
+### 進行管理パターン
+- セッション内: **TaskCreate** / **TaskUpdate** で各ステップを追跡
+- セッション永続化: 各ステップ完了時に `progress.md` を **Write** で更新
+- 途中再開: **Glob** `03_writing/01_draft/*/progress.md` → **Read** で状態復元
+
+### ペルソナ処理パターン
+- ペルソナレビュー（Step 4）: **Agent tool** (subagent_type: general-purpose) でサブエージェント実行
+- ペルソナ会話（`/persona`）: **Agent tool** でロールプレイ実行
+- プロンプトテンプレートは各スキルディレクトリ内の `*_prompt.md` を参照
+
+### 並列実行パターン
+- 複数のファイル Read は可能な限り並列で実行
+- WebSearch も独立したクエリは並列で実行
+- Agent tool の並列起動は複数ペルソナの比較時に使用

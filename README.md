@@ -14,31 +14,34 @@ AIと協働して文章記事を作成するためのフレームワーク。
 
 ### 1. ブランド設定を記入する
 
-`00_config/concept/` 配下のファイルを記入する:
+以下のファイルにブランド設定を記入する:
 
 ```
-00_config/concept/persona.md       ← ターゲットペルソナを定義
-00_config/concept/brand_script.md   ← ブランドスクリプト（SB7）を記入
-00_config/concept/tone_manner.md    ← トーン＆マナーを定義
+01_strategy/03_target/persona.md    ← ターゲットペルソナを定義
+01_strategy/04_brand/brand_script.md ← ブランドスクリプト（SB7）を記入
+00_config/concept/tone_manner.md     ← トーン＆マナーを定義
 ```
 
 ### 2. 記事を作成する
 
+Claude Code で以下のスラッシュコマンドを実行:
+
 ```
-# ワークフローを開いて手順に従う
-00_config/workflow/01_article_creation.md
+/article テーマ名
 ```
 
-AI（Claude Code等）に以下のように指示:
+または全体マップを確認:
 
-> `00_config/workflow/01_article_creation.md` を読んで、記事作成ワークフローを開始してください。
+```
+/overview
+```
 
 ### 3. スライド画像を生成する（オプション）
 
 ```bash
 # 初回セットアップ
-chmod +x 00_config/workflow/scripts/slideimg.sh
-alias slideimg='00_config/workflow/scripts/slideimg.sh'
+chmod +x .claude/skills/3-slide/scripts/slideimg.sh
+alias slideimg='.claude/skills/3-slide/scripts/slideimg.sh'
 
 # 画像生成
 slideimg init 20260301_my_article
@@ -54,14 +57,30 @@ Strategy → Ideation → Writing → Analysis
    └─────── フィードバック ─────────────┘
 ```
 
-| フェーズ | ディレクトリ | ワークフロー | 役割 |
-|---------|-------------|-------------|------|
-| Strategy | `01_strategy/` | `00_config/workflow/09_strategy.md` | 中期計画・KPI目標 |
-| Ideation | `02_ideation/` | `00_config/workflow/07_planning.md` | ネタ出し・テーマ評価 |
-| Writing | `03_writing/` | `00_config/workflow/01_article_creation.md` | 素材→執筆（Step 0-5） |
-| Analysis | `04_analysis/` | `00_config/workflow/08_post_analysis.md` | 振り返り・分析 |
+| フェーズ | ディレクトリ | スキル | 役割 |
+|---------|-------------|--------|------|
+| Strategy | `01_strategy/` | `/strategy` | 中期計画・KPI目標 |
+| Ideation | `02_ideation/` | `/ideation` | ネタ出し・テーマ評価 |
+| Writing | `03_writing/` | `/article` | 素材→執筆（Step 0-5） |
+| Analysis | `04_analysis/` | `/analysis` | 振り返り・分析 |
 
-詳細は `00_config/workflow/00_overview.md` を参照。
+詳細は `/overview` スキルで確認。
+
+## スキル一覧（スラッシュコマンド）
+
+| コマンド | 用途 |
+|---------|------|
+| `/overview` | ライフサイクル全体マップ・セッション再開 |
+| `/strategy` | 中期計画策定 |
+| `/ideation` | テーマ企画・評価 |
+| `/interview` | AIインタビューで素材引き出し |
+| `/article` | 記事作成（Step 0-5） |
+| `/slide` | スライド画像生成 |
+| `/screenshot` | スクリーンショット加工 |
+| `/review` | ペルソナレビュー単体実行 |
+| `/analysis` | 公開後振り返り |
+| `/persona` | ペルソナ会話シミュレーション |
+| `/daily-note-article-items` | デイリーノートから記事素材抽出 |
 
 ## ディレクトリ構造
 
@@ -71,36 +90,30 @@ Strategy → Ideation → Writing → Analysis
 ├── README.md                           # 本ファイル
 ├── .gitignore
 │
+├── .claude/skills/                     # Claude Code スキル定義
+│   ├── 0-overview/                     # /overview
+│   ├── 1-strategy/                     # /strategy
+│   ├── 2-ideation/                     # /ideation
+│   ├── 2-interview/                    # /interview
+│   ├── 3-article/                      # /article（メインWF + テンプレート）
+│   ├── 3-slide/                        # /slide（スクリプト + YAMLテンプレート）
+│   ├── 3-screenshot/                   # /screenshot（加工スクリプト）
+│   ├── 3-review/                       # /review
+│   ├── 4-analysis/                     # /analysis
+│   ├── x-persona/                      # /persona
+│   └── daily-note-article-items/       # /daily-note-article-items
+│
 ├── 00_config/                          # 基盤設定
-│   ├── workflow/                       # ワークフロー定義
-│   │   ├── 00_overview.md              # ライフサイクル全体マップ
-│   │   ├── 01_article_creation.md      # Writing メインWF（Step 0-5）
-│   │   ├── 02_ai_interview.md          # AIインタビュー
-│   │   ├── 03_screenshot_privacy.md    # スクリーンショット加工
-│   │   ├── 04_slide_generation.md      # スライド画像作成
-│   │   ├── 05_persona_roleplay.md      # ペルソナロールプレイ
-│   │   ├── 06_strategy_council.md      # マルチAI戦略会議（準備中）
-│   │   ├── 07_planning.md              # Ideation WF
-│   │   ├── 08_post_analysis.md         # Analysis WF
-│   │   ├── 09_strategy.md              # Strategy WF
-│   │   ├── scripts/                    # 自動化スクリプト
-│   │   └── prompts/                    # プロンプト
-│   ├── concept/                        # ブランド設定（ユーザーが記入）
-│   │   ├── persona.md                  # ペルソナ定義
-│   │   ├── brand_script.md             # ブランドスクリプト
+│   ├── concept/                        # ブランド設定
 │   │   └── tone_manner.md              # トンマナ定義
-│   └── template/                       # テンプレート
-│       ├── step0_memo.md 〜 step5_publish.md  # Writing Step 0-5
-│       ├── planning_memo.md            # Ideation 企画メモ
-│       ├── analysis_sheet.md           # Analysis 振り返りシート
-│       ├── strategy_sheet.md           # Strategy 中期計画シート
-│       ├── slide_image_prompts.yaml    # スライド画像プロンプト例
-│       ├── brand/                      # ブランド関連テンプレート
-│       └── prompt_templates/           # 図解パターン別YAMLテンプレート
+│   └── template/
+│       └── brand/                      # ブランド関連テンプレート
 │
 ├── 01_strategy/                        # Strategy: 中期計画
 │   ├── 01_calendar/                    # コンテンツカレンダー
-│   └── 02_goals/                       # KPI目標・方針
+│   ├── 02_goals/                       # KPI目標・方針
+│   ├── 03_target/                      # ペルソナ定義
+│   └── 04_brand/                       # ブランドスクリプト
 │
 ├── 02_ideation/                        # Ideation: 個別企画
 │   ├── 01_ideas/                       # ネタ帳・テーマ候補
@@ -115,14 +128,14 @@ Strategy → Ideation → Writing → Analysis
 │   └── 01_data/                        # 振り返りシート・KPIデータ
 │
 ├── 90_task/                            # 横断: タスク管理
-└── 99_archive/                         # アーカイブ
+├── 99_archive/                         # アーカイブ
+└── LICENSE                             # PolyForm Internal Use 1.0.0
 ```
 
 ## 必要要件
 
-- **AI CLI**: Claude Code / Codex / Gemini CLI のいずれか
+- **AI CLI**: Claude Code（推奨）
 - **Python 3.10+**: スライド画像生成・スクリーンショット加工に必要
-- **tmux**: マルチAI戦略会議に必要（オプション）
 - **Gemini API Key**: スライド画像生成に必要（オプション）
 
 ## ライセンス

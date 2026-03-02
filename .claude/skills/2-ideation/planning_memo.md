@@ -21,7 +21,7 @@
 
 
 ### 誰に向けて書くか
-<!-- ターゲットペルソナ（00_config/concept/persona.md から選定） -->
+<!-- ターゲットペルソナ（01_strategy/03_target/persona.md から選定） -->
 
 
 ---

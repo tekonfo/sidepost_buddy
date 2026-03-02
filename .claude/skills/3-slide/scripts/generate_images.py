@@ -17,7 +17,7 @@ try:
 except ImportError as exc:  # pragma: no cover - runtime guard
     raise SystemExit(
         "Missing dependency: pyyaml. Install with "
-        "`pip install -r 00_config/workflow/scripts/requirements.txt`."
+        "`pip install -r .claude/skills/3-slide/scripts/requirements.txt`."
     ) from exc
 
 MODEL_PRESETS = {
@@ -61,7 +61,7 @@ def load_google_genai_modules() -> tuple[object, object]:
     except ImportError as exc:  # pragma: no cover - runtime guard
         raise SystemExit(
             "Missing dependency: google-genai. Install with "
-            "`pip install -r 00_config/workflow/scripts/requirements.txt`."
+            "`pip install -r .claude/skills/3-slide/scripts/requirements.txt`."
         ) from exc
     return genai, types
 

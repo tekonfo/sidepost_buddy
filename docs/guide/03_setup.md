@@ -61,7 +61,7 @@
 
 1. `01_strategy/04_brand/brand_script.md` を開く
 2. テンプレートに沿って 7 つの要素を埋める
-3. 迷ったら `00_config/template/brand/brand_script_template.md` の記入例を参考にする
+3. 迷ったら `01_strategy/04_brand/brand_script_template.md` の記入例を参考にする
 
 ## 3. トーン＆マナーの設定
 

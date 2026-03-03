@@ -107,14 +107,14 @@ Strategy → Planning → Prep → Writing → Management
 ├── 00_config/                          # 基盤設定
 │   ├── concept/                        # ブランド設定
 │   │   └── tone_manner.md              # トンマナ定義
-│   └── template/
-│       └── brand/                      # ブランド関連テンプレート
 │
 ├── 01_strategy/                        # Strategy: 中期計画
 │   ├── 01_calendar/                    # コンテンツカレンダー
 │   ├── 02_goals/                       # KPI目標・方針
 │   ├── 03_target/                      # ペルソナ定義
-│   └── 04_brand/                       # ブランドスクリプト
+│   └── 04_brand/                       # ブランド関連
+│       ├── brand_script.md             # ブランドスクリプト（SB7）
+│       └── brand_script_template.md    # ブランドスクリプトテンプレート
 │
 ├── 02_planning/                        # Planning: 個別企画
 │   ├── 01_ideas/                       # ネタ帳・テーマ候補

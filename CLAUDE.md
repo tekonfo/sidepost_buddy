@@ -52,7 +52,7 @@ Strategy → Planning → Prep → Writing → Management
 | ペルソナ定義 | `01_strategy/03_target/persona.md` | ターゲット読者の定義 |
 | ブランドスクリプト | `01_strategy/04_brand/brand_script.md` | StoryBrand SB7 |
 | トーン＆マナー | `00_config/concept/tone_manner.md` | 文体・表現ルール |
-| ブランドスクリプトテンプレート | `00_config/template/brand/brand_script_template.md` | ブランドスクリプトの型 |
+| ブランドスクリプトテンプレート | `01_strategy/04_brand/brand_script_template.md` | ブランドスクリプトの型 |
 
 ## AI制約（重要）
 
